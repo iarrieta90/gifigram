@@ -1,0 +1,90 @@
+{
+  "name": "web",
+  "description": "gifify project web app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "craco start",
+    "dev": "yarn run start",
+    "build": "craco build",
+    "eject": "react-scripts eject",
+    "lint:js": "eslint . --ext .js",
+    "lint:js:fix": "yarn run lint:js -- --fix",
+    "lint:format": "prettier --write .",
+    "lint:format:check": "prettier --check .",
+    "precommit": "lint-staged"
+  },
+  "author": "Irati Arrieta Vega",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iarrieta90/gifigram"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@craco/craco": "^6.1.2",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@tailwindcss/postcss7-compat": "^2.1.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "autoprefixer": "^9",
+    "axios": "^0.21.1",
+    "dotenv": "^9.0.2",
+    "firebase": "^8.6.1",
+    "node-sass": "^6.0.0",
+    "normalizr": "^3.6.1",
+    "postcss": "^7",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.7.2",
+    "eslint-plugin-html": "^6.1.2",
+    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-markdown": "^2.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "history": "^5.0.0",
+    "prettier": "^2.3.0"
+  }
+}

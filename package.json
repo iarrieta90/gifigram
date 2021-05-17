@@ -1,0 +1,28 @@
+{
+  "name": "root",
+  "description": "A web app for sharing your favorite gifs and memes among friends",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "Irati Arrieta Vega",
+  "scripts": {
+    "dev": "yarn workspaces run dev",
+    "dev:web": "yarn workspace web run start",
+    "dev:api": "yarn workspace api run dev",
+    "build": "yarn workspaces run build",
+    "lint:js": "yarn workspaces run lint:js",
+    "lint:js:fix": "yarn workspaces run lint:js:fix",
+    "lint:format": "yarn workspaces run lint:format",
+    "lint:format:check": "yarn workspaces run lint:format:check",
+    "precommit": "yarn workspaces run precommit"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "commitlint": "^12.1.4",
+    "eslint": "^7.26.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0"
+  }
+}

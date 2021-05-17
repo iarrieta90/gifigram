@@ -1,0 +1,47 @@
+{
+  "name": "api",
+  "description": "gifify project api",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "nodemon --inspect --trace-warnings ./src/index.js",
+    "lint:js": "eslint . --ext .js",
+    "lint:js:fix": "yarn run lint:js -- --fix",
+    "lint:format": "prettier --write .",
+    "lint:format:check": "prettier --check .",
+    "precommit": "lint-staged"
+  },
+  "author": "Irati Arrieta Vega",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iarrieta90/gifigram"
+  },
+  "type": "commonjs",
+  "keywords": [
+    "node.js"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-node": "^11.1.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "firebase-admin": "^9.8.0",
+    "helmet": "^4.6.0",
+    "loglevel": "^1.7.1",
+    "mongoose": "^5.12.9",
+    "morgan": "^1.10.0",
+    "validator": "^13.6.0"
+  }
+}
