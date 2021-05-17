@@ -1,7 +1,6 @@
 const path = require("path");
 const tailwindcss = require("tailwindcss");
 const autoprefixer = require("autoprefixer");
-const postcssFocusVisible = require("postcss-focus-visible");
 
 const purgecss = require("@fullhuman/postcss-purgecss")({
   content: [
@@ -16,7 +15,6 @@ module.exports = {
     postcss: {
       plugins: [
         tailwindcss,
-        postcssFocusVisible,
         autoprefixer,
         ...(process.env.NODE_ENV === "production" ? [purgecss] : []),
       ],
