@@ -31,7 +31,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className="min-h-screen min-w-screen bg-gray-100">
       <Switch>
         <Route path={ROUTES.HOME} component={Home} exact />
       </Switch>

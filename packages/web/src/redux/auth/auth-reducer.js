@@ -9,12 +9,6 @@ export const AuthInitialState = {
   isSendingPasswordReset: false,
   passwordResetError: null,
   passwordResetSent: false,
-  userIsUpdating: false,
-  userIsUpdated: false,
-  userUpdateError: null,
-  passwordIsChanging: false,
-  passwordIsChanged: null,
-  passwordChangeError: null,
   currentUser: {
     email: null,
   },

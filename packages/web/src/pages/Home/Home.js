@@ -1,10 +1,12 @@
 import React from "react";
 
+import Main from "../../layout/Main";
+
 function Home() {
   return (
-    <div>
+    <Main>
       <p>Hello from home</p>
-    </div>
+    </Main>
   );
 }
 
