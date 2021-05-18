@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+// import { useForm } from "react-hook-form";
 
+import {
+  resetAuthState,
+  // signInWithEmailRequest,
+  // signUpWithEmailRequest,
+  // signUpWithGoogleRequest,
+  // sendPasswordResetEmail,
+} from "../../redux/auth/auth-actions";
+
+// import { hideAuthModal } from "../../redux/modal/modal-actions";
+
+// import TextInput from "../Input/TextInput";
+// import PasswordInput from "../Input/PasswordInput";
 import CloseBtn from "../CloseBtn";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import ResetPassword from "./ResetPassword";
 
 function AuthModal() {
+  const [isLogin, setIsLogin] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [isResetPassword, setIsResetPassword] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetAuthState());
+  }, [dispatch]);
+
   return (
-    <article className="md:w-3/6 md:mx-auto left-0 right-0 bg-dark mt-20 rounded-md">
+    <article className="md:w-1/2 md:mx-auto left-0 right-0 bg-dark-dark mt-20 rounded-md p-1 flex flex-col align-middle mx-auto">
       <CloseBtn />
-      <div>
-        <h2 className="text-center text-white text-xl font-semibold">Log in</h2>
-        <form className="flex flex-col px-10 sm:px-20 py-10">
-          <input type="text" className="" />
-        </form>
-      </div>
+      {isLogin && (
+        <Login
+          setIsLogin={setIsLogin}
+          setIsSignUp={setIsSignUp}
+          setIsResetPassword={setIsResetPassword}
+        />
+      )}
+      {isSignUp && <SignUp setIsLogin={setIsLogin} setIsSignUp={setIsSignUp} />}
+      {isResetPassword && (
+        <ResetPassword
+          setIsLogin={setIsLogin}
+          setIsResetPassword={setIsResetPassword}
+        />
+      )}
     </article>
   );
 }

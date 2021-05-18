@@ -42,7 +42,7 @@ export function signUpWithEmailRequest(formData) {
     dispatch(signUpRequest(formData));
     try {
       const { email, password } = formData;
-      await auth.singUpWithEmailAndPassword(email, password);
+      await auth.signUpWithEmailAndPassword(email, password);
     } catch (error) {
       dispatch(signUpError(error.message));
     }

@@ -5,9 +5,9 @@ const { userController } = require("../controllers");
 
 const userRouter = Router();
 
-userRouter.post("sign-up", authMiddleware, userController.signUp);
-userRouter.post("sign-out", authMiddleware, userController.signOut);
-userRouter.get("/users", userController.fetchUsers);
+userRouter.post("/api/sign-up", authMiddleware, userController.signUp);
+userRouter.post("/api/sign-out", authMiddleware, userController.signOut);
+userRouter.get("/api/users", userController.fetchUsers);
 
 module.exports = {
   userRouter: userRouter,
