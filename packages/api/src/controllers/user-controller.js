@@ -1,8 +1,5 @@
 const { UserRepo } = require("../repositories");
-const {
-  handleDbResponseFind,
-  handleDbResponseCreate,
-} = require("../utils/handleDbResponse");
+const { handleDbResponseFind } = require("../utils/handleDbResponse");
 
 // SIGN UP
 
@@ -19,7 +16,20 @@ async function signUp(req, res, next) {
         };
 
     const dbResponseFindUser = await UserRepo.findOne({ email: email });
-    handleDbResponseFind(res, dbResponseFindUser);
+
+    if (dbResponseFindUser.error) {
+      return res.status(400).send({
+        data: null,
+        error: dbResponseFindUser.error,
+      });
+    }
+
+    if (dbResponseFindUser.data) {
+      return res.status(200).send({
+        data: dbResponseFindUser.data,
+        error: null,
+      });
+    }
 
     const dbResponseCreateUser = await UserRepo.create({
       firebaseId: uid,
@@ -29,7 +39,11 @@ async function signUp(req, res, next) {
       username: username,
       avatar: avatar,
     });
-    handleDbResponseCreate(res, dbResponseCreateUser);
+
+    res.status(201).send({
+      data: dbResponseCreateUser.data,
+      error: null,
+    });
   } catch (error) {
     next(error);
   }
