@@ -47,7 +47,7 @@ Input.propTypes = {
 Input.defaultProps = {
   placeholder: "",
   defaultValue: "",
-  errors: {},
+  errors: null,
 };
 
 export default Input;
