@@ -32,6 +32,15 @@ const UserSchema = Schema(
       type: String,
       trim: true,
     },
+    followedBy: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "user",
+        },
+      ],
+      default: [],
+    },
   },
   {
     timestamps: true,

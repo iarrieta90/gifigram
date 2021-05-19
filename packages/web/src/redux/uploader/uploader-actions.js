@@ -38,14 +38,14 @@ export function uploadImage({ image, title }) {
       const imageUrl = urlRes.data.url;
 
       const imgRes = api.createPost({
-        body: { title: title, url: imageUrl },
         headers: { Authorization: `Bearer ${userToken}` },
+        body: { title: title, url: imageUrl },
       });
-      console.log(imgRes);
       if (imgRes.errorMessage) {
         return dispatch(uploadImageError(imgRes.errorMessage));
       }
 
+      console.log(imgRes);
       return dispatch(uploadImageSuccess(imgRes.data));
     } catch (err) {
       return dispatch(uploadImageError(err));

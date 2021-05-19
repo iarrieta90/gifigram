@@ -15,23 +15,23 @@ async function signUp(req, res, next) {
           avatar: "",
         };
 
-    const dbResponseFindUser = await UserRepo.findOne({ email: email });
+    const findUser = await UserRepo.findOne({ email: email });
 
-    if (dbResponseFindUser.error) {
+    if (findUser.error) {
       return res.status(400).send({
         data: null,
-        error: dbResponseFindUser.error,
+        error: findUser.error,
       });
     }
 
-    if (dbResponseFindUser.data) {
+    if (findUser.data) {
       return res.status(200).send({
-        data: dbResponseFindUser.data,
+        data: findUser.data,
         error: null,
       });
     }
 
-    const dbResponseCreateUser = await UserRepo.create({
+    const createUser = await UserRepo.create({
       firebaseId: uid,
       email: email,
       firstName: firstName,
@@ -40,10 +40,19 @@ async function signUp(req, res, next) {
       avatar: avatar,
     });
 
-    res.status(201).send({
-      data: dbResponseCreateUser.data,
-      error: null,
-    });
+    if (createUser.error) {
+      return res.status(500).send({
+        data: null,
+        error: createUser.error,
+      });
+    }
+
+    if (createUser.data) {
+      return res.status(201).send({
+        data: createUser.data,
+        error: null,
+      });
+    }
   } catch (error) {
     next(error);
   }

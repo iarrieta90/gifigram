@@ -28,7 +28,6 @@ function UploadModal() {
       uploadImage({
         image: image,
         title: data.title,
-        // onUploadProgress: (progress) => {},
       }),
     );
 
@@ -36,17 +35,9 @@ function UploadModal() {
   };
 
   const handleImg = (e) => {
-    // if (e.target.files[0]) {
     const file = e.target.files[0];
     setSrc(URL.createObjectURL(file));
     setImage(file);
-    // const reader = new FileReader();
-    // reader.onloadend = () => {
-    //   const base64String = reader.result;
-    //   setImage(base64String);
-    // };
-    // reader.readAsDataURL(file);
-    // }
   };
 
   return (
@@ -106,8 +97,8 @@ function UploadModal() {
                 validation={{
                   required: { value: true, message: "Title is required!" },
                   maxLength: {
-                    value: 20,
-                    message: "Error max length 20 char!",
+                    value: 40,
+                    message: "Error max length 40 char!",
                   },
                   pattern: {
                     value: /[A-Za-z]{2}/,
