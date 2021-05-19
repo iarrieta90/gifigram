@@ -54,7 +54,7 @@ function Main({ children }) {
       </button>
 
       <Navbar />
-      <section className="md:container md:mx-auto p-8 pt-24 pb-16">
+      <section className="container md:mx-auto p-8 pt-24 pb-16 md:w-2/3">
         {children}
       </section>
     </>

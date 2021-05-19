@@ -6,8 +6,12 @@ import * as ROUTES from "./routes";
 import { onAuthStateChanged } from "./services/auth";
 
 import { signOut, syncSignIn } from "./redux/auth/auth-actions";
+
 import { fetchPosts } from "./redux/posts/post-actions";
 import { postTypes } from "./redux/posts/post-types";
+
+import { fetchUsers } from "./redux/users/user-actions";
+import { userTypes } from "./redux/users/user-types";
 
 import Home from "./pages/Home";
 
@@ -34,10 +38,11 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchPosts(postTypes.ALL_POSTS));
+    dispatch(fetchUsers(userTypes.ALL_USERS));
   }, [dispatch]);
 
   return (
-    <div className="h-full w-full bg-gray-100">
+    <div className="min-h-screen min-w-screen bg-gray-100">
       <Switch>
         <Route path={ROUTES.HOME} component={Home} exact />
       </Switch>
