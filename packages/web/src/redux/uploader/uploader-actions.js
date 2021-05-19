@@ -21,9 +21,9 @@ export function uploadImage({ image, title }) {
   return async function uploadImageThunk(dispatch) {
     dispatch(uploadImageRequest());
     try {
-      const userToken = await getCurrentUserToken();
+      const token = await getCurrentUserToken();
 
-      if (!userToken) {
+      if (!token) {
         return dispatch(uploadImageError("User token null!"));
       }
 
@@ -38,14 +38,13 @@ export function uploadImage({ image, title }) {
       const imageUrl = urlRes.data.url;
 
       const imgRes = api.createPost({
-        headers: { Authorization: `Bearer ${userToken}` },
+        headers: { Authorization: `Bearer ${token}` },
         body: { title: title, url: imageUrl },
       });
       if (imgRes.errorMessage) {
         return dispatch(uploadImageError(imgRes.errorMessage));
       }
 
-      console.log(imgRes);
       return dispatch(uploadImageSuccess(imgRes.data));
     } catch (err) {
       return dispatch(uploadImageError(err));

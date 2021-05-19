@@ -36,8 +36,8 @@ function Main({ children }) {
         type="button"
         className={
           showText
-            ? "absolute z-10 top-20 left-5 bg-orange-500 h-10 w-48 rounded-full text-white text-xl font-semibold"
-            : "absolute z-10 top-20 left-5 bg-orange-500 h-10 w-10 rounded-full text-white text-2xl"
+            ? "fixed z-10 top-20 left-5 bg-orange-500 h-10 w-48 rounded-full text-white text-xl font-semibold"
+            : "fixed z-10 top-20 left-5 bg-orange-500 h-10 w-10 rounded-full text-white text-2xl"
         }
         onMouseEnter={() => setShowText(true)}
         onMouseLeave={() => setShowText(false)}
@@ -54,7 +54,7 @@ function Main({ children }) {
       </button>
 
       <Navbar />
-      <section className="md:container md:mx-auto p-8 pt-24 mb-16">
+      <section className="md:container md:mx-auto p-8 pt-24 pb-16">
         {children}
       </section>
     </>

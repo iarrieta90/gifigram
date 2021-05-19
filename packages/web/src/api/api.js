@@ -31,6 +31,14 @@ function makeApi(request = makeRequest()) {
     });
   }
 
+  function getAllPosts(headers) {
+    return request({
+      url: "/api/posts",
+      requestMethod: "GET",
+      headers: headers,
+    });
+  }
+
   // USERS
 
   function getUsers(headers) {
@@ -45,6 +53,7 @@ function makeApi(request = makeRequest()) {
     signUp: signUp,
     signOut: signOut,
     createPost: createPost,
+    getAllPosts: getAllPosts,
     getUsers: getUsers,
   };
 }

@@ -5,6 +5,7 @@ const { postController } = require("../controllers");
 
 const postRouter = Router();
 
+postRouter.get("/api/posts", postController.fetchAllPosts);
 postRouter.post("/api/posts", authMiddleware, postController.createPost);
 
 module.exports = {
