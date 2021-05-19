@@ -6,6 +6,8 @@ import * as ROUTES from "./routes";
 import { onAuthStateChanged } from "./services/auth";
 
 import { signOut, syncSignIn } from "./redux/auth/auth-actions";
+import { fetchPosts } from "./redux/posts/post-actions";
+import { postTypes } from "./redux/posts/post-types";
 
 import Home from "./pages/Home";
 
@@ -30,8 +32,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(fetchPosts(postTypes.ALL_POSTS));
+  }, [dispatch]);
+
   return (
-    <div className="min-h-screen min-w-screen bg-gray-100">
+    <div className="h-full w-full bg-gray-100">
       <Switch>
         <Route path={ROUTES.HOME} component={Home} exact />
       </Switch>

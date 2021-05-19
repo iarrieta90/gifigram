@@ -42,6 +42,29 @@ async function createPost(req, res, next) {
   }
 }
 
+async function fetchAllPosts(req, res, next) {
+  try {
+    const findPosts = await PostRepo.findAll();
+
+    if (findPosts.error) {
+      return res.status(404).send({
+        data: null,
+        error: findPosts.error,
+      });
+    }
+
+    if (findPosts.data) {
+      return res.status(200).send({
+        data: findPosts.data,
+        error: null,
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   createPost: createPost,
+  fetchAllPosts: fetchAllPosts,
 };
