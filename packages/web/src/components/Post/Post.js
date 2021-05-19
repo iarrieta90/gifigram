@@ -21,7 +21,11 @@ function Post({ post }) {
   const { usersByID } = useSelector((state) => state?.users);
 
   const { title, url, authorId } = post;
-  const author = usersByID[authorId].username;
+  const author = usersByID[authorId]?.username;
+
+  function handleShareCLick() {
+    return navigator.clipboard.writeText(url);
+  }
 
   return (
     <article className="bg-gray-100 mr-4 lg:mr-12 mb-10 shadow-sm border border-gray-200 ">
@@ -39,7 +43,9 @@ function Post({ post }) {
         <div className="pb-1 text-gray-600">
           <i className="pr-3 text-xl">{likeOff}</i>
           <i className="pr-3 text-xl">{comment}</i>
-          <i className="pr-3 text-xl">{share}</i>
+          <button type="button" onClick={handleShareCLick}>
+            <i className="pr-3 text-xl hover:text-orange-500">{share}</i>
+          </button>
         </div>
         <p className="font-thin">
           <span className="font-semibold pr-3">{author}</span>

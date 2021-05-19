@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { string } from "prop-types";
 
-import defaultAvatar from "../../assets/img/no-user.png";
+import defaultAvatar from "../../assets/no-user.png";
 
 const Avatar = ({ height, width }) => {
   const { avatar } = useState((state) => state?.auth?.currentUser);

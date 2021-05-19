@@ -34,6 +34,14 @@ const uploaderReducer = (state = UploaderInitialState, action) => {
         imageUrls: [...state.imageUrls, action.payload],
       };
     }
+    case UploaderTypes.UPLOAD_IMAGE_RESET: {
+      return {
+        ...state,
+        isUploadingImage: false,
+        uploadImageSuccess: false,
+        uploadImageError: null,
+      };
+    }
     default: {
       return state;
     }
