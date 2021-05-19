@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import { hideUploadModal } from "../../redux/modal/modal-actions";
+import { uploadImage } from "../../redux/uploader/uploader-actions";
 
 import CloseBtn from "../CloseBtn";
 import TextInput from "../Input/TextInput";
@@ -23,25 +24,29 @@ function UploadModal() {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch();
-    // uploadImage({
-    //   image: data.gif,
-    //   title: data.title,
-    // }),
+    dispatch(
+      uploadImage({
+        image: image,
+        title: data.title,
+        // onUploadProgress: (progress) => {},
+      }),
+    );
+
     dispatch(hideUploadModal());
   };
 
   const handleImg = (e) => {
-    if (e.target.files[0]) {
-      const file = e.target.files[0];
-      setSrc(URL.createObjectURL(file));
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result;
-        setImage(base64String);
-      };
-      reader.readAsDataURL(file);
-    }
+    // if (e.target.files[0]) {
+    const file = e.target.files[0];
+    setSrc(URL.createObjectURL(file));
+    setImage(file);
+    // const reader = new FileReader();
+    // reader.onloadend = () => {
+    //   const base64String = reader.result;
+    //   setImage(base64String);
+    // };
+    // reader.readAsDataURL(file);
+    // }
   };
 
   return (
