@@ -3,6 +3,10 @@ import { getCurrentUserToken } from "../../services/auth";
 import { getFileUrl } from "../../services/cloudinary";
 import * as UploaderTypes from "./uploader-types";
 
+export const uploadImageReset = () => ({
+  type: UploaderTypes.UPLOAD_IMAGE_RESET,
+});
+
 export const uploadImageRequest = () => ({
   type: UploaderTypes.UPLOAD_IMAGE_REQUEST,
 });
@@ -44,8 +48,8 @@ export function uploadImage({ image, title }) {
       if (imgRes.errorMessage) {
         return dispatch(uploadImageError(imgRes.errorMessage));
       }
-
-      return dispatch(uploadImageSuccess(imgRes.data));
+      dispatch(uploadImageSuccess(imgRes.data));
+      return dispatch(uploadImageReset());
     } catch (err) {
       return dispatch(uploadImageError(err));
     }

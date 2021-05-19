@@ -1,18 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import * as ROUTES from "../../routes";
-
+// import {
+//   faCloudUploadAlt,
+//   faPlusCircle,
+// } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { modalStateSelector } from "../../redux/modal/modal-selector";
 import { signOut } from "../../redux/auth/auth-actions";
 import { authSelector } from "../../redux/auth/auth-selector";
-
 import { showAuthModal } from "../../redux/modal/modal-actions";
 
-import SearchBar from "../SearchBar";
-import Avatar from "../Avatar";
+import * as ROUTES from "../../routes";
 
-function Navbar() {
+import Avatar from "../../components/Avatar";
+// import SongCard from "../../components/SongCard";
+// import PlaylistCard from "../../components/PlayListCard";
+import UserCard from "../../components/UserCard";
+// import UploadButton from "../../components/UploadButton";
+// import Player from "../../components/Player";
+// import PlaylistModal from "../../components/PlaylistModal";
+// import SongModal from "../../components/SongModal";
+// import DeleteModal from "../../components/DeleteModal";
+// import PlaylistDeleteModal from "../../components/PlaylistDeleteModal";
+
+// const addSong = <FontAwesomeIcon title="Upload song" icon={faCloudUploadAlt} />;
+// const addPlaylist = (
+//   <FontAwesomeIcon title="Create playlist" icon={faPlusCircle} />
+// );
+
+import Post from "../../components/Post";
+
+const SearchView = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [toggleUserMenu, setToggleUserMenu] = useState(false);
 
@@ -24,9 +44,45 @@ function Navbar() {
     setToggleUserMenu((prevVal) => !prevVal);
   }
 
+  const { postsByID } = useSelector((state) => state.posts);
+  const { usersByID } = useSelector((state) => state.users);
+
+  const [search, setSearch] = useState("");
+
+  const [posts, setPosts] = useState({ ...postsByID });
+  const foundPosts = [];
+  for (const index in posts) {
+    if (index && search !== "") {
+      if (postsByID[index].title.toLowerCase().includes(search.toLowerCase())) {
+        foundPosts.push(postsByID[index]);
+      }
+    }
+  }
+
+  const [users, setUsers] = useState({ ...usersByID });
+  const foundUsers = [];
+  for (const index in users) {
+    if (index && search !== "" && index !== "undefined") {
+      if (
+        usersByID[index]?.username
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        usersByID[index]?.firstName
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        usersByID[index]?.lastName.toLowerCase().includes(search.toLowerCase())
+      ) {
+        foundUsers.push(usersByID[index]);
+      }
+    }
+  }
+
+  const inputRef = useRef(null);
+  useEffect(() => inputRef.current && inputRef.current.focus());
+
   return (
     <>
-      <nav className="bg-gray-800 text-blue-100 fixed z-10 w-screen">
+      <nav className="bg-gray-800 text-blue-100">
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -78,9 +134,28 @@ function Navbar() {
               </div>
               <div className="hidden sm:block m-auto">
                 <div className="flex space-x-4">
-                  <Link to={ROUTES.SEARCH}>
-                    <SearchBar />
-                  </Link>
+                  <div className="rounded-full overflow-hidden flex">
+                    <input
+                      type="text"
+                      className="px-4 py-2 h-8 w-full border-0 focus:outline-none text-black"
+                      placeholder="Search..."
+                      ref={inputRef}
+                      onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <button
+                      className="flex items-center justify-center px-4 bg-white border-none focus:outline-none"
+                      type="button"
+                    >
+                      <svg
+                        className="h-4 w-4 text-grey-dark"
+                        fill="#000"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -157,13 +232,63 @@ function Navbar() {
         {isNavbarOpen && (
           <div className="sm:hidden" id="mobile-menu">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <SearchBar />
+              <div className="rounded-full overflow-hidden flex">
+                <input
+                  type="text"
+                  className="px-4 py-2 h-8 w-full border-0 focus:outline-none text-black"
+                  placeholder="Search..."
+                />
+                <button
+                  className="flex items-center justify-center px-4 bg-white border-none focus:outline-none"
+                  type="button"
+                >
+                  <svg
+                    className="h-4 w-4 text-grey-dark"
+                    fill="#000"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         )}
       </nav>
+
+      {search === "" ? (
+        <div className="container my-24 mx-auto px-4 md:px-12">
+          <h1 className="text-5xl">Search For Something...</h1>
+        </div>
+      ) : (
+        <div className="container mb-24 my-12 mx-auto px-4 md:px-12">
+          <article className="pb-10">
+            <h2 className="pb-2 font-semibold text-gray-800 text-xl">Posts</h2>
+            <hr className="border-gray-400 pb-2 mb-5" />
+            <section className="flex flex-wrap justify-center sm:justify-start mx-1 lg:mx-4">
+              {foundPosts.length === 0
+                ? "No posts found with this search query"
+                : foundPosts?.map((post) => (
+                    <Post key={post._id} post={post} />
+                  ))}
+            </section>
+          </article>
+          <article className="pb-10">
+            <h2 className="pb-2 font-semibold text-gray-800 text-xl">User</h2>
+            <hr className="border-gray-400 pb-2 mb-5" />
+            <section className="flex flex-wrap justify-center sm:justify-start mx-1 lg:mx-4">
+              {foundUsers.length === 0
+                ? "No artists found with this search query"
+                : foundUsers?.map((user) => (
+                    <UserCard key={user._id} user={user} />
+                  ))}
+            </section>
+          </article>
+        </div>
+      )}
     </>
   );
-}
+};
 
-export default Navbar;
+export default SearchView;
