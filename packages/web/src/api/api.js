@@ -3,12 +3,12 @@ import { makeRequest } from "./api-utils";
 function makeApi(request = makeRequest()) {
   // AUTHENTICATION
 
-  function signUp(headers, options) {
+  function signUp(headers, body) {
     return request({
       url: "/api/sign-up",
       requestMethod: "POST",
       headers: headers,
-      body: options,
+      body: body,
     });
   }
 
@@ -17,6 +17,17 @@ function makeApi(request = makeRequest()) {
       url: "/api/sign-out",
       requestMethod: "POST",
       headers: headers,
+    });
+  }
+
+  // POSTS
+
+  function createPost({ headers, body }) {
+    return request({
+      url: "/api/posts",
+      requestMethod: "POST",
+      headers: headers,
+      body: body,
     });
   }
 
@@ -33,6 +44,7 @@ function makeApi(request = makeRequest()) {
   return {
     signUp: signUp,
     signOut: signOut,
+    createPost: createPost,
     getUsers: getUsers,
   };
 }
