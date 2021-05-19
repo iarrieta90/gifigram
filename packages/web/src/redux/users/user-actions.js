@@ -1,6 +1,9 @@
 import api from "../../api";
 import { normalizeUsers } from "../../schema/user-schema";
 import * as UserTypes from "./user-types";
+import { userTypes } from "./user-types";
+
+// FETCH A COLLECTION OF USERS
 
 export const fetchUsersRequest = () => ({
   type: UserTypes.FETCH_USERS_REQUEST,
@@ -12,7 +15,7 @@ export const fetchUsersError = ({ message }) => ({
 });
 
 export const fetchUsersSuccess = ({
-  type = userTypes.ALL,
+  type = userTypes.ALL_USERS,
   usersByID,
   userIds,
 }) => ({
@@ -23,6 +26,22 @@ export const fetchUsersSuccess = ({
     userIds: userIds,
   },
 });
+
+export function fetchUsers(type) {
+  switch (type) {
+    case userTypes.ALL_USERS:
+      return fetchAllUsers();
+    case userTypes.FOLLOWERS:
+      return fetchFollowerUsers();
+    case userTypes.FOLLOWING:
+      return fetchFollowingUsers();
+    default:
+      break;
+  }
+  return fetchAllUsers();
+}
+
+// Fetch all users
 
 export function fetchAllUsers() {
   return async function fetchUsersThunk(dispatch) {
@@ -49,3 +68,11 @@ export function fetchAllUsers() {
     }
   };
 }
+
+// Fetch users I am following
+
+export function fetchFollowingUsers() {}
+
+// Fetch users I follow
+
+export function fetchFollowerUsers() {}
