@@ -1,11 +1,12 @@
 import React from "react";
 
 import Main from "../../layout/Main";
+import Post from "../../components/Post";
 
 function Home() {
   return (
     <Main>
-      <p>Hello from home</p>
+      <Post />
     </Main>
   );
 }
