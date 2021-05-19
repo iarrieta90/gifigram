@@ -1,19 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-// import { useForm } from "react-hook-form";
 
-import {
-  resetAuthState,
-  // signInWithEmailRequest,
-  // signUpWithEmailRequest,
-  // signUpWithGoogleRequest,
-  // sendPasswordResetEmail,
-} from "../../redux/auth/auth-actions";
+import { resetAuthState } from "../../redux/auth/auth-actions";
 
-// import { hideAuthModal } from "../../redux/modal/modal-actions";
-
-// import TextInput from "../Input/TextInput";
-// import PasswordInput from "../Input/PasswordInput";
 import CloseBtn from "../CloseBtn";
 import Login from "./Login";
 import SignUp from "./SignUp";

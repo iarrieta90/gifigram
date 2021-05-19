@@ -19,7 +19,9 @@ function Login({ setIsLogin, setIsSignUp, setIsResetPassword }) {
     formState: { errors },
     handleSubmit,
     setValue,
-  } = useForm();
+  } = useForm({
+    mode: "onBlur",
+  });
 
   const dispatch = useDispatch();
 

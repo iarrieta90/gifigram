@@ -60,7 +60,7 @@ PasswordInput.propTypes = {
 };
 
 PasswordInput.defaultProps = {
-  errors: {},
+  errors: null,
 };
 
 export default PasswordInput;

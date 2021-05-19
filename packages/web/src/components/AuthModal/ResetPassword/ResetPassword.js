@@ -15,7 +15,9 @@ function ResetPassword({ setIsLogin, setIsResetPassword }) {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    mode: "onBlur",
+  });
   const dispatch = useDispatch();
 
   const handleLoginClick = () => {

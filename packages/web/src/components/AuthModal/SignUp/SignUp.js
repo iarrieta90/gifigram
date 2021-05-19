@@ -19,7 +19,9 @@ function SignUp({ setIsLogin, setIsSignUp }) {
     formState: { errors },
     handleSubmit,
     setValue,
-  } = useForm();
+  } = useForm({
+    mode: "onBlur",
+  });
 
   const dispatch = useDispatch();
 
