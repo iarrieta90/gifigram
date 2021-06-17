@@ -39,7 +39,7 @@ This is a monorepo created with `Yarn`. The packages are `api` and `web`. See ea
 - [packages/web](packages/web/README.md)
 - [packages/api](packages/api/README.md)
 
-## Buil with 🛠️
+## Built with 🛠️
 * `NodeJS`
 * `Yarn`
 * `ReactJS`
